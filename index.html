@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open in Mail</title>
+<style>
+  body { font: 16px -apple-system, BlinkMacSystemFont, sans-serif; margin: 48px 24px; color: #222; background: #fff; }
+  a { color: #0a66d8; }
+</style>
+</head>
+<body>
+<p id="status">Opening Mail...</p>
+<script>
+  // The message ID travels in the #fragment, which browsers never send to the web server.
+  var id = decodeURIComponent(location.hash.slice(1));
+  var status = document.getElementById("status");
+  if (id) {
+    var url = "message://%3c" + id + "%3e";
+    location.href = url;
+    status.textContent = "Opening Mail. If nothing happens, ";
+    var a = document.createElement("a");
+    a.href = url;
+    a.textContent = "click here";
+    status.appendChild(a);
+    status.appendChild(document.createTextNode(". You can close this tab."));
+  } else {
+    status.textContent = "No email ID in this link.";
+  }
+</script>
+</body>
+</html>
